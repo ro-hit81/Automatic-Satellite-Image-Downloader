@@ -137,11 +137,12 @@ def getLandsatProductById(productId):
             folder = 'L01_MSS_Tier_2'
 
     else:
-    print('Image not found for LANDSAT_PRODUCT ID ' + productId + '.')
+        print('Image not found for LANDSAT_PRODUCT ID ' + productId + '.')
 
     product = ee.Image(collection_id + productId[sensor_slice] + '_' + productId[image_number_slice])
     product = product.select(bands)
-
+    
+    # Exporting image to google drive with specific parametes
     Task = ee.batch.Export.image.toDrive(**{
     'image': product,
     'description': productId,
